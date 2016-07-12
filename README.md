@@ -1,2 +1,1 @@
-# cbpl
-Command Block Programming Language
+# Yes, I know it's badly written.
