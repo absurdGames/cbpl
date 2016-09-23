@@ -1,64 +1,48 @@
 package org.absurd.cbpl;
 
+import static org.absurd.cbpl.CompileResult.CHAIN;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.regex.Matcher;
+import java.util.Map;
+import java.util.function.BiConsumer;
+
+import org.absurd.cbpl.parsing.CBPLLexer;
+import org.absurd.cbpl.parsing.CBPLParser;
+import org.absurd.cbpl.parsing.CBPLParser.ProgramContext;
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.fusesource.jansi.AnsiConsole;
 
 public class Cbpl {
-	
+
 	public static final void main(String[] args) {
-		try {
-			new Cbpl("x = 5 + 5;").run();
-		} catch (CbplException e) {
-			System.err.println("Error: " + e.getMessage());
-			System.err.println("Row " + e.row + ", Col " + e.col);
-		}
-	}
-	
-	public String content;
-	public List<Token> tokens;
-	
-	public Cbpl(String content) throws CbplException {
-		this.content = content;
-		this.tokens = tokenize(this.content);
-	}
-	
-	public void run() {
-		
+		AnsiConsole.systemInstall();
+		new Cbpl().interpret("say(who=\"test\", obj=\"lol\");");
+		AnsiConsole.systemUninstall();
 	}
 
-	public static List<Token> tokenize(String content) throws CbplException {
-		List<Token> tokens = new ArrayList<Token>();
-		Matcher m = TokenType.PATTERN.matcher(content);
-		int row, col;
-		row = col = 1;
-		while (m.find()) {
-			String group = m.group();
-			TokenType type = TokenType.fromInput(group);
-			if (type == TokenType.UNKNOWN)
-				throw new CbplException("Unknown token " + group, row, col);
-			else if (type == TokenType.SPACE || type == TokenType.COMMENT)
-				col += group.length();
-			else if (type == TokenType.NEWLINE) {
-				col = 1;
-				row++;
-			} else {
-				tokens.add(new Token(type, group, row, col));
-				col += group.length();
-			}
-		}
-		tokens.add(new Token(TokenType.EOF, 0, row, col));
-		System.out.println(tokens);
-		return tokens;
+	public Visitors visitors;
+	public Map<String, BiConsumer<Cbpl, Map<String, Object>>> functions;
+	public List<CompileResult> compiled;
+
+	public Cbpl() {
+		visitors = new Visitors(this);
+		functions = new HashMap<String, BiConsumer<Cbpl, Map<String, Object>>>();
+		compiled = new ArrayList<CompileResult>();
+		/* Built-in Functions */
+		functions.put("say", (cbpl, args) -> compiled.add(new CompileResult(CHAIN,
+				String.format("/tellraw %s {text:\"%s\"}", args.get("who"), args.get("obj")))));
 	}
 
-	public static <T> String joinString(String delimiter, List<T> objs) {
-		String output = "";
-		for (int i = 0; i < objs.size(); i++) {
-			output = output + delimiter + objs.get(i);
-		}
-		output = output.substring(1);
-		return output;
+	public void interpret(String code) {
+		CBPLLexer lexer = new CBPLLexer(new ANTLRInputStream(code));
+		CommonTokenStream tokens = new CommonTokenStream(lexer);
+		CBPLParser parser = new CBPLParser(tokens);
+		parser.setBuildParseTree(true);
+		ProgramContext tree = parser.program();
+		tree.accept(visitors.mainVisitor);
 	}
-	
+
 }
