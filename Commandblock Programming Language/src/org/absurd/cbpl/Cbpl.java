@@ -29,7 +29,7 @@ public class Cbpl {
 		in = new Scanner(System.in);
 		AnsiConsole.systemInstall();
 		Cbpl cbpl = new Cbpl();
-		cbpl.interpret(FileUtils.readFileToString(new File("/home/midnightas/cbpl.cbpl")));
+		cbpl.interpret(FileUtils.readFileToString(new File(args[0])));
 		for (CompileResult compiled : cbpl.compiled)
 			System.out.println(compiled);
 		System.out.println(Ansi.ansi().cursorLeft(1).reset());
@@ -42,6 +42,7 @@ public class Cbpl {
 	public List<CompileResult> compiled;
 	public Map<String, String> compileNames;
 	public String scriptName = "";
+	public String armorStandSelector = "";
 
 	public Cbpl() {
 		visitors = new Visitors(this);
@@ -70,6 +71,7 @@ public class Cbpl {
 				.a("This script uses non-final variables. Please enter a script name to use as the ArmorStand name and the scoreboard name.\nSpaces are not allowed.")
 				.reset());
 		scriptName = in.nextLine();
+		armorStandSelector = "@e[type=ArmorStand,name=" + scriptName + "]";
 	}
 
 	public String simpleVarToString(Variable v) {
