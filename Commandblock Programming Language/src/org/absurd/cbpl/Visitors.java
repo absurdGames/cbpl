@@ -62,7 +62,7 @@ public class Visitors {
 				compiledVarName = cbpl.scriptName + cbpl.compileNames.size();
 				cbpl.compileNames.put(ctx.IDENTIFIER().getText(), compiledVarName);
 				cbpl.compiled.add(new CompileResult(CompileResult.CHAIN, "/scoreboard objectives add " + compiledVarName + " dummy " + compiledVarName));
-				cbpl.compiled.add(new CompileResult(CompileResult.CHAIN, "/scoreboard players set " + cbpl.armorStandSelector + " " + ctx.number().value));
+				cbpl.compiled.add(new CompileResult(CompileResult.CHAIN, "/scoreboard players set " + cbpl.armorStandSelector + " " + compiledVarName + " " + ctx.number().value));
 			}
 			return null;
 		}
