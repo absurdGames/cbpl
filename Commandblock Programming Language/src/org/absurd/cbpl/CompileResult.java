@@ -4,8 +4,6 @@ import org.fusesource.jansi.Ansi;
 
 public class CompileResult {
 
-	private static Ansi ansi = Ansi.ansi();
-
 	public static final String IMPULSE, REPEAT, CHAIN;
 
 	public String type;
@@ -16,12 +14,16 @@ public class CompileResult {
 		this.type = type;
 		this.cmd = cmd;
 	}
-
+	
+	public String toString() {
+		return type + Ansi.ansi().fgBrightRed().a(cmd);
+	}
+	
 	static {
-		String suffix = ansi.fgDefault().a(": ").toString();
-		IMPULSE = ansi.fgYellow().a("i" + suffix).toString();
-		REPEAT = ansi.fgMagenta().a("r" + suffix).toString();
-		CHAIN = ansi.fgBrightBlue().a("c" + suffix).toString();
+		String suffix = Ansi.ansi().fgDefault().a(": ").toString();
+		IMPULSE = Ansi.ansi().fgYellow().a("i" + suffix).toString();
+		REPEAT = Ansi.ansi().fgMagenta().a("r" + suffix).toString();
+		CHAIN = Ansi.ansi().fgBrightBlue().a("c" + suffix).toString();
 	}
 
 }

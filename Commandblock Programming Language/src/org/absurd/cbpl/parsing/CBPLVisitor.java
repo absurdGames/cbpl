@@ -24,6 +24,20 @@ public interface CBPLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFunctionCallStatement(CBPLParser.FunctionCallStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code setVariableStatement}
+	 * labeled alternative in {@link CBPLParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSetVariableStatement(CBPLParser.SetVariableStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code setFinalVariableStatement}
+	 * labeled alternative in {@link CBPLParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSetFinalVariableStatement(CBPLParser.SetFinalVariableStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CBPLParser#lineTerminator}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -54,21 +68,49 @@ public interface CBPLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitNumber(CBPLParser.NumberContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CBPLParser#coord}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCoord(CBPLParser.CoordContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CBPLParser#floatingNumber}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFloatingNumber(CBPLParser.FloatingNumberContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CBPLParser#string}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitString(CBPLParser.StringContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CBPLParser#varName}.
+	 * Visit a parse tree produced by the {@code numberExpr}
+	 * labeled alternative in {@link CBPLParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitVarName(CBPLParser.VarNameContext ctx);
+	T visitNumberExpr(CBPLParser.NumberExprContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CBPLParser#expr}.
+	 * Visit a parse tree produced by the {@code stringExpr}
+	 * labeled alternative in {@link CBPLParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpr(CBPLParser.ExprContext ctx);
+	T visitStringExpr(CBPLParser.StringExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code varExpr}
+	 * labeled alternative in {@link CBPLParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVarExpr(CBPLParser.VarExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code coordExpr}
+	 * labeled alternative in {@link CBPLParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCoordExpr(CBPLParser.CoordExprContext ctx);
 }

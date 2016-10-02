@@ -30,6 +30,30 @@ public interface CBPLListener extends ParseTreeListener {
 	 */
 	void exitFunctionCallStatement(CBPLParser.FunctionCallStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code setVariableStatement}
+	 * labeled alternative in {@link CBPLParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterSetVariableStatement(CBPLParser.SetVariableStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code setVariableStatement}
+	 * labeled alternative in {@link CBPLParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitSetVariableStatement(CBPLParser.SetVariableStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code setFinalVariableStatement}
+	 * labeled alternative in {@link CBPLParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterSetFinalVariableStatement(CBPLParser.SetFinalVariableStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code setFinalVariableStatement}
+	 * labeled alternative in {@link CBPLParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitSetFinalVariableStatement(CBPLParser.SetFinalVariableStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CBPLParser#lineTerminator}.
 	 * @param ctx the parse tree
 	 */
@@ -80,6 +104,26 @@ public interface CBPLListener extends ParseTreeListener {
 	 */
 	void exitNumber(CBPLParser.NumberContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CBPLParser#coord}.
+	 * @param ctx the parse tree
+	 */
+	void enterCoord(CBPLParser.CoordContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CBPLParser#coord}.
+	 * @param ctx the parse tree
+	 */
+	void exitCoord(CBPLParser.CoordContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CBPLParser#floatingNumber}.
+	 * @param ctx the parse tree
+	 */
+	void enterFloatingNumber(CBPLParser.FloatingNumberContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CBPLParser#floatingNumber}.
+	 * @param ctx the parse tree
+	 */
+	void exitFloatingNumber(CBPLParser.FloatingNumberContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CBPLParser#string}.
 	 * @param ctx the parse tree
 	 */
@@ -90,23 +134,51 @@ public interface CBPLListener extends ParseTreeListener {
 	 */
 	void exitString(CBPLParser.StringContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CBPLParser#varName}.
+	 * Enter a parse tree produced by the {@code numberExpr}
+	 * labeled alternative in {@link CBPLParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterVarName(CBPLParser.VarNameContext ctx);
+	void enterNumberExpr(CBPLParser.NumberExprContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CBPLParser#varName}.
+	 * Exit a parse tree produced by the {@code numberExpr}
+	 * labeled alternative in {@link CBPLParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitVarName(CBPLParser.VarNameContext ctx);
+	void exitNumberExpr(CBPLParser.NumberExprContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CBPLParser#expr}.
+	 * Enter a parse tree produced by the {@code stringExpr}
+	 * labeled alternative in {@link CBPLParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpr(CBPLParser.ExprContext ctx);
+	void enterStringExpr(CBPLParser.StringExprContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CBPLParser#expr}.
+	 * Exit a parse tree produced by the {@code stringExpr}
+	 * labeled alternative in {@link CBPLParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpr(CBPLParser.ExprContext ctx);
+	void exitStringExpr(CBPLParser.StringExprContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code varExpr}
+	 * labeled alternative in {@link CBPLParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterVarExpr(CBPLParser.VarExprContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code varExpr}
+	 * labeled alternative in {@link CBPLParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitVarExpr(CBPLParser.VarExprContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code coordExpr}
+	 * labeled alternative in {@link CBPLParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterCoordExpr(CBPLParser.CoordExprContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code coordExpr}
+	 * labeled alternative in {@link CBPLParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitCoordExpr(CBPLParser.CoordExprContext ctx);
 }

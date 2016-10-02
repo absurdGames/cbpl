@@ -40,6 +40,30 @@ public class CBPLBaseListener implements CBPLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterSetVariableStatement(CBPLParser.SetVariableStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSetVariableStatement(CBPLParser.SetVariableStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSetFinalVariableStatement(CBPLParser.SetFinalVariableStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSetFinalVariableStatement(CBPLParser.SetFinalVariableStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterLineTerminator(CBPLParser.LineTerminatorContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -100,6 +124,30 @@ public class CBPLBaseListener implements CBPLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCoord(CBPLParser.CoordContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCoord(CBPLParser.CoordContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFloatingNumber(CBPLParser.FloatingNumberContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFloatingNumber(CBPLParser.FloatingNumberContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterString(CBPLParser.StringContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -112,25 +160,49 @@ public class CBPLBaseListener implements CBPLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterVarName(CBPLParser.VarNameContext ctx) { }
+	@Override public void enterNumberExpr(CBPLParser.NumberExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitVarName(CBPLParser.VarNameContext ctx) { }
+	@Override public void exitNumberExpr(CBPLParser.NumberExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpr(CBPLParser.ExprContext ctx) { }
+	@Override public void enterStringExpr(CBPLParser.StringExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpr(CBPLParser.ExprContext ctx) { }
+	@Override public void exitStringExpr(CBPLParser.StringExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVarExpr(CBPLParser.VarExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVarExpr(CBPLParser.VarExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCoordExpr(CBPLParser.CoordExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCoordExpr(CBPLParser.CoordExprContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
