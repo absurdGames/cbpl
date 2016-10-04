@@ -19,6 +19,8 @@ import org.fusesource.jansi.AnsiConsole;
 
 public class Cbpl {
 
+	public static final int MAJOR_VERSION = 0;
+	
 	public static String TELLRAW_FORMAT = "/tellraw %s %s";
 	public static String SETUP_ARMOR_STAND = "/summon ArmorStand ~ ~ ~ {CustomName:\"%s\",CustomNameVisible:0}";
 	public static String NEW_VARIABLE = "/scoreboard objectives add %1$s dummy %1$s";
@@ -43,10 +45,12 @@ public class Cbpl {
 	public Map<String, String> compileNames;
 	public String scriptName = "";
 	public String armorStandSelector = "";
+	public Map<String, Variable> compileTimeVars;
 
 	public Cbpl() {
 		visitors = new Visitors(this);
 		functions = new HashMap<String, BiConsumer<Cbpl, Map<String, Variable>>>();
+		compileTimeVars = new HashMap<String, Variable>();
 		compileNames = new HashMap<String, String>();
 		compiled = new ArrayList<CompileResult>();
 		/* Built-in Functions */
@@ -68,7 +72,7 @@ public class Cbpl {
 
 	public void getScriptName() {
 		System.out.println(Ansi.ansi().fgGreen()
-				.a("This script uses non-final variables. Please enter a script name to use as the ArmorStand name and the scoreboard name.\nSpaces are not allowed.")
+				.a("This script uses non-compile-time variables. Please enter a script name to use as the ArmorStand name and the scoreboard name.\nSpaces are not allowed.")
 				.reset());
 		scriptName = in.nextLine();
 		armorStandSelector = "@e[type=ArmorStand,name=" + scriptName + "]";

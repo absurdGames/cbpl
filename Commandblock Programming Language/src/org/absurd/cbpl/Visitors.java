@@ -6,12 +6,17 @@ import java.util.function.BiConsumer;
 
 import org.absurd.cbpl.parsing.CBPLBaseVisitor;
 import org.absurd.cbpl.parsing.CBPLParser.ArgContext;
+import org.absurd.cbpl.parsing.CBPLParser.CbplVersionContext;
 import org.absurd.cbpl.parsing.CBPLParser.FunctionCallStatementContext;
+import org.absurd.cbpl.parsing.CBPLParser.JsonExprContext;
 import org.absurd.cbpl.parsing.CBPLParser.NumberExprContext;
 import org.absurd.cbpl.parsing.CBPLParser.ProgramContext;
+import org.absurd.cbpl.parsing.CBPLParser.SelectorExprContext;
+import org.absurd.cbpl.parsing.CBPLParser.SetCompileTimeVariableStatementContext;
 import org.absurd.cbpl.parsing.CBPLParser.SetVariableStatementContext;
 import org.absurd.cbpl.parsing.CBPLParser.StringExprContext;
 import org.absurd.cbpl.parsing.CBPLParser.VarExprContext;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 public class Visitors {
 
@@ -30,7 +35,18 @@ public class Visitors {
 
 	private class MainVisitor extends CBPLBaseVisitor<Void> {
 		public Void visitProgram(ProgramContext ctx) {
+			if (ctx.cbplVersion() == null || ctx.cbplVersion().number() == null)
+				System.exit(0);
+			visit(ctx.cbplVersion());
 			ctx.statement().forEach(stmt -> stmtVisitor.visit(stmt));
+			return null;
+		}
+
+		public Void visitCbplVersion(CbplVersionContext ctx) {
+			if (ctx.number().value != Cbpl.MAJOR_VERSION) {
+				System.err.println("Invalid CBPL major version: " + ctx.number().value);
+				System.exit(0);
+			}
 			return null;
 		}
 	}
@@ -56,14 +72,21 @@ public class Visitors {
 						new CompileResult(CompileResult.CHAIN, String.format(Cbpl.SETUP_ARMOR_STAND, cbpl.scriptName)));
 			}
 			String compiledVarName;
-			if(cbpl.compileNames.containsKey(ctx.IDENTIFIER().getText()))
+			if (cbpl.compileNames.containsKey(ctx.IDENTIFIER().getText()))
 				compiledVarName = cbpl.compileNames.get(ctx.IDENTIFIER().getText());
 			else {
 				compiledVarName = cbpl.scriptName + cbpl.compileNames.size();
 				cbpl.compileNames.put(ctx.IDENTIFIER().getText(), compiledVarName);
-				cbpl.compiled.add(new CompileResult(CompileResult.CHAIN, "/scoreboard objectives add " + compiledVarName + " dummy " + compiledVarName));
-				cbpl.compiled.add(new CompileResult(CompileResult.CHAIN, "/scoreboard players set " + cbpl.armorStandSelector + " " + compiledVarName + " " + ctx.number().value));
+				cbpl.compiled.add(new CompileResult(CompileResult.CHAIN,
+						"/scoreboard objectives add " + compiledVarName + " dummy " + compiledVarName));
+				cbpl.compiled.add(new CompileResult(CompileResult.CHAIN, "/scoreboard players set "
+						+ cbpl.armorStandSelector + " " + compiledVarName + " " + ctx.number().value));
 			}
+			return null;
+		}
+
+		public Void visitSetCompileTimeVariableStatement(SetCompileTimeVariableStatementContext ctx) {
+			cbpl.compileTimeVars.put(ctx.IDENTIFIER().getText(), exprVisitor.visit(ctx.expr()));
 			return null;
 		}
 	}
@@ -74,11 +97,20 @@ public class Visitors {
 		}
 
 		public Variable visitStringExpr(StringExprContext ctx) {
-			return new Variable(ctx.string().value);
+			return new Variable(StringEscapeUtils.unescapeJava(ctx.string().value));
 		}
-		
+
+		public Variable visitJsonExpr(JsonExprContext ctx) {
+			return new Variable(ctx.jsonObject().getText(), true);
+		}
+
+		public Variable visitSelectorExpr(SelectorExprContext ctx) {
+			return new Variable(ctx.selector().getText(), true);
+		}
+
 		public Variable visitVarExpr(VarExprContext ctx) {
-			return new Variable(String.format("{\"score\":{\"name\":\"%s\",\"objective\":\"%s\"}}", cbpl.scriptName, cbpl.compileNames.get(ctx.IDENTIFIER().getText())), true);
+			return new Variable(String.format("{\"score\":{\"name\":\"%s\",\"objective\":\"%s\"}}", cbpl.scriptName,
+					cbpl.compileNames.get(ctx.IDENTIFIER().getText())), true);
 		}
 	}
 

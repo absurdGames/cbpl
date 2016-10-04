@@ -18,6 +18,106 @@ public interface CBPLListener extends ParseTreeListener {
 	 */
 	void exitProgram(CBPLParser.ProgramContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CBPLParser#cbplVersion}.
+	 * @param ctx the parse tree
+	 */
+	void enterCbplVersion(CBPLParser.CbplVersionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CBPLParser#cbplVersion}.
+	 * @param ctx the parse tree
+	 */
+	void exitCbplVersion(CBPLParser.CbplVersionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CBPLParser#selector}.
+	 * @param ctx the parse tree
+	 */
+	void enterSelector(CBPLParser.SelectorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CBPLParser#selector}.
+	 * @param ctx the parse tree
+	 */
+	void exitSelector(CBPLParser.SelectorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CBPLParser#selectorKeyValuePair}.
+	 * @param ctx the parse tree
+	 */
+	void enterSelectorKeyValuePair(CBPLParser.SelectorKeyValuePairContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CBPLParser#selectorKeyValuePair}.
+	 * @param ctx the parse tree
+	 */
+	void exitSelectorKeyValuePair(CBPLParser.SelectorKeyValuePairContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CBPLParser#selectorValue}.
+	 * @param ctx the parse tree
+	 */
+	void enterSelectorValue(CBPLParser.SelectorValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CBPLParser#selectorValue}.
+	 * @param ctx the parse tree
+	 */
+	void exitSelectorValue(CBPLParser.SelectorValueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CBPLParser#letter}.
+	 * @param ctx the parse tree
+	 */
+	void enterLetter(CBPLParser.LetterContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CBPLParser#letter}.
+	 * @param ctx the parse tree
+	 */
+	void exitLetter(CBPLParser.LetterContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CBPLParser#jsonObject}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsonObject(CBPLParser.JsonObjectContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CBPLParser#jsonObject}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsonObject(CBPLParser.JsonObjectContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CBPLParser#jsonKeyValuePair}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsonKeyValuePair(CBPLParser.JsonKeyValuePairContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CBPLParser#jsonKeyValuePair}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsonKeyValuePair(CBPLParser.JsonKeyValuePairContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CBPLParser#jsonKey}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsonKey(CBPLParser.JsonKeyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CBPLParser#jsonKey}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsonKey(CBPLParser.JsonKeyContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CBPLParser#jsonValue}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsonValue(CBPLParser.JsonValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CBPLParser#jsonValue}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsonValue(CBPLParser.JsonValueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CBPLParser#jsonArray}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsonArray(CBPLParser.JsonArrayContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CBPLParser#jsonArray}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsonArray(CBPLParser.JsonArrayContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code functionCallStatement}
 	 * labeled alternative in {@link CBPLParser#statement}.
 	 * @param ctx the parse tree
@@ -42,17 +142,17 @@ public interface CBPLListener extends ParseTreeListener {
 	 */
 	void exitSetVariableStatement(CBPLParser.SetVariableStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code setFinalVariableStatement}
+	 * Enter a parse tree produced by the {@code setCompileTimeVariableStatement}
 	 * labeled alternative in {@link CBPLParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void enterSetFinalVariableStatement(CBPLParser.SetFinalVariableStatementContext ctx);
+	void enterSetCompileTimeVariableStatement(CBPLParser.SetCompileTimeVariableStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code setFinalVariableStatement}
+	 * Exit a parse tree produced by the {@code setCompileTimeVariableStatement}
 	 * labeled alternative in {@link CBPLParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void exitSetFinalVariableStatement(CBPLParser.SetFinalVariableStatementContext ctx);
+	void exitSetCompileTimeVariableStatement(CBPLParser.SetCompileTimeVariableStatementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CBPLParser#lineTerminator}.
 	 * @param ctx the parse tree
@@ -181,4 +281,28 @@ public interface CBPLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCoordExpr(CBPLParser.CoordExprContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code jsonExpr}
+	 * labeled alternative in {@link CBPLParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsonExpr(CBPLParser.JsonExprContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code jsonExpr}
+	 * labeled alternative in {@link CBPLParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsonExpr(CBPLParser.JsonExprContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code selectorExpr}
+	 * labeled alternative in {@link CBPLParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterSelectorExpr(CBPLParser.SelectorExprContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code selectorExpr}
+	 * labeled alternative in {@link CBPLParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitSelectorExpr(CBPLParser.SelectorExprContext ctx);
 }
