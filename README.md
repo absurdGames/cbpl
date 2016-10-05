@@ -27,3 +27,11 @@ Arguments:
 | who      | obj         |
 |----------|-------------|
 | Selector | JSON/string |
+
+# Compiling
+After you have written a program, open up your terminal/cmd and run the compiler using:
+
+    java -jar (CBPL_COMPILER_LOCATION) (CBPL_FILE_LOCATION)
+What to replace there is pretty obvious.
+You will then get a list of commands prefixed with either `i`, `c` or `r`.
+`i` represents Impulse, `c` for Chain and `r` is for Repeat.
