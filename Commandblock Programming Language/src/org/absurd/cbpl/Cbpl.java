@@ -19,7 +19,7 @@ import org.fusesource.jansi.AnsiConsole;
 
 public class Cbpl {
 
-	public static final int MAJOR_VERSION = 0;
+	public static final int SYNTAX_VERSION = 1;
 	
 	public static String TELLRAW_FORMAT = "/tellraw %s %s";
 	public static String SETUP_ARMOR_STAND = "/summon ArmorStand ~ ~ ~ {CustomName:\"%s\",CustomNameVisible:0}";
